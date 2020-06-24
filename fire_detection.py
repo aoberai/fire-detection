@@ -72,20 +72,3 @@ else:
     print("Confidence: {0}".format(prediction[0][0] * 100))
 
 
-
-
-
-#
-#
-# image = cv2.imread("./fire_dataset/non_fire_images/non_fire.11.png")
-# image = cv2.resize(src=image, dsize=(150, 150))
-# image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-#
-# print(image)
-
-
-# cv2.imshow("test", image)
-# cv2.waitKey(0)
-
-
-# cv2.resize()
