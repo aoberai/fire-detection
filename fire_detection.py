@@ -7,7 +7,7 @@ import cv2
 def preprocess_image(preprocessed_image: np.ndarray) -> np.ndarray:
     new_image = cv2.resize(src=preprocessed_image, dsize=(input_shape[0], input_shape[1]))
     new_image = cv2.cvtColor(new_image, cv2.COLOR_BGR2RGB)
-    return new_image
+    return new_image/255.0
 
 
 fire_images_dataset_length = len(os.listdir("./fire_dataset/fire_images"))
@@ -57,14 +57,12 @@ print("\n Model created\n\n")
 model_path = "./fire_detection_model.h5"
 model.save(model_path)
 
-test_image = preprocess_image(cv2.imread("model_test_images/fire.6.png"))
+test_image = preprocess_image(cv2.imread("model_test_images/non_fire.3.png"))
 test_image = np.expand_dims(test_image, 0)
-
-fire_threshold = 0.8
 
 prediction = model.predict(test_image)
 
-if prediction[0][0] < prediction[0][1] and prediction[0][1] > fire_threshold:
+if prediction[0][0] < prediction[0][1]:
     print("Image is detected as fire")
     print("Confidence: {0}".format(prediction[0][1] * 100))
 else:
